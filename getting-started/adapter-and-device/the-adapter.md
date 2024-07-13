@@ -2,11 +2,11 @@ The Adapter
 ===========
 
 ```{lit-setup}
-:tangle-root: 005 - The Adapter - next
-:parent: 001 - Hello WebGPU - next
+:tangle-root: 005 - The Adapter
+:parent: 001 - Hello WebGPU
 ```
 
-*Resulting code:* [`step005-next`](https://github.com/eliemichel/LearnWebGPU-Code/tree/step005-next)
+*Resulting code:* [`step005`](https://github.com/eliemichel/LearnWebGPU-Code/tree/step005)
 
 Before getting our hand on a **device**, we need to select an **adapter**. The same host system may expose **multiple adapters** if it has access to multiple physical GPUs. It may also have an adapter that represents an emulated/virtual device.
 
@@ -334,7 +334,13 @@ We can first list the limits that our adapter supports with `wgpuAdapterGetLimit
 #ifndef __EMSCRIPTEN__
 WGPUSupportedLimits supportedLimits = {};
 supportedLimits.nextInChain = nullptr;
+
+#ifdef WEBGPU_BACKEND_DAWN
+bool success = wgpuAdapterGetLimits(adapter, &supportedLimits) == WGPUStatus_Success;
+#else
 bool success = wgpuAdapterGetLimits(adapter, &supportedLimits);
+#endif
+
 if (success) {
 	std::cout << "Adapter limits:" << std::endl;
 	std::cout << " - maxTextureDimension1D: " << supportedLimits.limits.maxTextureDimension1D << std::endl;
@@ -345,8 +351,10 @@ if (success) {
 #endif // NOT __EMSCRIPTEN__
 ```
 
-```{note}
-As of April 1st, 2024, `wgpuAdapterGetLimits` is not implemented yet on Google Chrome, hence the `#ifndef __EMSCRIPTEN__` above.
+```{admonition} Implementation divergences
+The procedure `wgpuAdapterGetLimits` returns a boolean in `wgpu-native` but a `WGPUStatus` in Dawn.
+
+Also, as of April 1st, 2024, `wgpuAdapterGetLimits` is not implemented yet on Google Chrome, hence the `#ifndef __EMSCRIPTEN__` above.
 ```
 
 Here is an example of what you could see:
@@ -452,4 +460,4 @@ Conclusion
  - Once we have an adapter, we can inspect its **capabilities** (limits, features) and properties.
  - We learned to use **asynchronous functions** and **double call** enumeration functions.
 
-*Resulting code:* [`step005-next`](https://github.com/eliemichel/LearnWebGPU-Code/tree/step005-next)
+*Resulting code:* [`step005`](https://github.com/eliemichel/LearnWebGPU-Code/tree/step005)

@@ -2,11 +2,11 @@ The Device
 ==========
 
 ```{lit-setup}
-:tangle-root: 010 - The Device - next
-:parent: 005 - The Adapter - next
+:tangle-root: 010 - The Device
+:parent: 005 - The Adapter
 ```
 
-*Resulting code:* [`step010-next`](https://github.com/eliemichel/LearnWebGPU-Code/tree/step010-next)
+*Resulting code:* [`step010`](https://github.com/eliemichel/LearnWebGPU-Code/tree/step010)
 
 A WebGPU **device** represents a **context** of use of the API. All the objects that we create (geometry, textures, etc.) are owned by the device.
 
@@ -246,7 +246,13 @@ void inspectDevice(WGPUDevice device) {
 
 	WGPUSupportedLimits limits = {};
 	limits.nextInChain = nullptr;
+
+#ifdef WEBGPU_BACKEND_DAWN
+	bool success = wgpuDeviceGetLimits(device, &limits) == WGPUStatus_Success;
+#else
 	bool success = wgpuDeviceGetLimits(device, &limits);
+#endif
+
 	if (success) {
 		std::cout << "Device limits:" << std::endl;
 		std::cout << " - maxTextureDimension1D: " << limits.limits.maxTextureDimension1D << std::endl;
@@ -285,6 +291,10 @@ std::cout << " - maxComputeWorkgroupsPerDimension: " << limits.limits.maxCompute
 
 ```{lit} C++, Create things (append, hidden)
 inspectDevice(device);
+```
+
+```{admonition} Implementation divergences
+Like for `wgpuAdapterGetLimits`, the procedure `wgpuDeviceGetLimits` returns a boolean in `wgpu-native` but a `WGPUStatus` in Dawn.
 ```
 
 We can see that by default the device limits are not the same as what the adapter supports. Setting `deviceDesc.requiredLimits` to `nullptr` above corresponded to ask for minimal limits:
@@ -353,8 +363,8 @@ desc.nextInChain = nullptr;
 WGPUDawnTogglesDescriptor toggles;
 toggles.chain.next = nullptr;
 toggles.chain.sType = WGPUSType_DawnTogglesDescriptor;
-toggles.disabledTogglesCount = 0;
-toggles.enabledTogglesCount = 1;
+toggles.disabledToggleCount = 0;
+toggles.enabledToggleCount = 1;
 const char* toggleName = "enable_immediate_error_handling";
 toggles.enabledToggles = &toggleName;
 
@@ -374,4 +384,4 @@ Conclusion
  - **Important:** Once the device is created, the adapter should in general no longer be used. The only capabilities that matter to the application are the one of the device.
  - Default limits are minimal limits, rather than what the adapter supports. This helps ensuring consistency across devices.
 
-*Resulting code:* [`step010-next`](https://github.com/eliemichel/LearnWebGPU-Code/tree/step010-next)
+*Resulting code:* [`step010`](https://github.com/eliemichel/LearnWebGPU-Code/tree/step010)
