@@ -37,8 +37,10 @@ WebGPU是一个**渲染硬件接口**，建立在您平台的驱动程序/操作
     Some APIs are directly provided by the driver, some others are an extra programming layer (a .so or .dll shared library, or some C files that needs to be compiled with your application).
 -->
 
-为何是WebGPU？
+Why WebGPU?
 -----------
+
+为何选择 WebGPU？
 
 > 🤔 对啊，我为什么要用一个**web API**来开发一个**桌面应用**呢？
 
@@ -112,12 +114,12 @@ WebGPU是一个**渲染硬件接口**，建立在您平台的驱动程序/操作
 
 如果您遇到任何错别字或更严重的问题，您可以点击每个页面顶部的编辑按钮来修复它们！
 
-```{image} images/edit-light.png
+```{image} /images/edit-light.png
 :alt: 使用每个页面顶部的编辑按钮！
 :class: only-light
 ```
 
-```{image} images/edit-dark.png
+```{image} /images/edit-dark.png
 :alt: 使用每个页面顶部的编辑按钮！
 :class: only-dark
 ```

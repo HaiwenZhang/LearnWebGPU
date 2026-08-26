@@ -5,6 +5,10 @@ Learn WebGPU
 这是[原英文页面](%original%)的**社区翻译**，自翻译以来有已更新，因此可能不再同步。欢迎您的[贡献](%contribute%)！
 ```
 
+```{admonition} 中文翻译状态
+中文版本现已覆盖英文主目录中的全部页面。除本页和“概述”外，其余页面目前是机器辅助翻译的初稿；代码、命令、路径和示例均保留原文，技术术语与中文表述仍欢迎人工校订。
+```
+
 *用于C++中的原生图形开发。*
 
 本文档将指导您使用[WebGPU](https://www.w3.org/TR/webgpu)图形API创建适用于Windows、Linux和macOS的**原生3D应用程序**。
@@ -78,10 +82,12 @@ Learn WebGPU
 ```{admonition}  🚧 施工中
 文档**仍在构建**，**WebGPU标准亦在不断发展**。为帮助读者跟踪本文档的最新进展，我们在各章标题中使用了如下标识：
 
-🟢 **最新版**：*使用最新版本的[WebGPU分发](https://github.com/eliemichel/WebGPU-distribution)*  
+🟢 **最新版**：*使用最新稳定版的[WebGPU分发](https://github.com/eliemichel/WebGPU-distribution)，即 `v0.2.0`。*  
 🟡 **已完成**：*已完成，但用的是旧版WebGPU*  
 🟠 **施工中**：*足够可读，但不完整*  
 🔴 **待施工**：*只触及了表面*  
+
+如需预览本文档未来版本，可查看隐藏的 [Next](../../next/index.md) 部分，但该部分并不保证稳定。
 
 **请注意：**<span></span>当使用章节的伴随代码时，请确保使用的是与`webgpu/`**相同的版本**，以避免差异。
 ```
